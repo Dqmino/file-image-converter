@@ -59,8 +59,8 @@ mod tests {
 
     #[test]
     fn test_convert_file_to_png() {
-        let pixel_rgb_bytes = convert_file_to_png("C:\\Users\\domin\\Desktop\\hello.txt", "C:\\Users\\domin\\Desktop\\hello.png").unwrap();
-        let data = convert_png_to_file("C:\\Users\\domin\\Desktop\\hello.png", Some("C:\\Users\\domin\\Desktop\\OMG.txt")).unwrap();
+        let pixel_rgb_bytes = convert_file_to_png("C:\\Users\\user\\file.txt", "C:\\Users\\user\\file-image.png").unwrap();
+        let data = convert_png_to_file("C:\\Users\\user\\file-image.png", Some("C:\\Users\\user\\file-text.txt")).unwrap();
 
         assert_eq!(clean_up(data), join(pixel_rgb_bytes));
     }
