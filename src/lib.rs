@@ -4,6 +4,7 @@ use image::{ImageBuffer, Rgb};
 
 fn read_file_as_3bytes_chunks(path: &str) -> Result<Vec<Vec<u8>>, Box<dyn std::error::Error>> {
     let byte_content = fs::read(path)?;
+    assert_ne!(byte_content.len(), 0);
     let result = byte_content.chunks(3).map(|chunk| chunk.to_vec()).collect();
     Ok(result)
 }
@@ -46,6 +47,7 @@ pub fn convert_png_to_file(path_to_image: &str, path_to_output: Option<&str>) ->
         byte_content.push(pixel.0[1]);
         byte_content.push(pixel.0[2]);
     });
+    assert_ne!(byte_content.len(), 0);
     if path_to_output.is_none() {
         return Ok(byte_content);
     }
@@ -59,10 +61,10 @@ mod tests {
 
     #[test]
     fn test_convert_file_to_png() {
-        let pixel_rgb_bytes = convert_file_to_png("C:\\Users\\user\\file.txt", "C:\\Users\\user\\file-image.png").unwrap();
-        let data = convert_png_to_file("C:\\Users\\user\\file-image.png", Some("C:\\Users\\user\\file-text.txt")).unwrap();
+        let pixel_rgb_bytes = convert_file_to_png("C:\\Users\\domin\\file.txt", "C:\\Users\\domin\\file-image.png").unwrap();
+        let data = convert_png_to_file("C:\\Users\\domin\\file-image.png", Some("C:\\Users\\domin\\file-text.txt")).unwrap();
 
-        assert_eq!(clean_up(data), join(pixel_rgb_bytes));
+        assert_eq!(clean_up(data), join(pixel_rgb_bytes)); // success
     }
 
     // function to join nested vectors into a single vector
